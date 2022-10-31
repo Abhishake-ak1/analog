@@ -227,7 +227,78 @@ return (a);
 
 void main()
 {
+int gdriver=DETECT,gmode,h,m,s,a,b,c;
+initgraph(&gdriver,&gmode,”c:\tc\bgi”);
 
+struct  time t;
+gettime(&t);
+h=t.ti_hour;
+m=t.ti_min;
+s=t.ti_sec;
+
+a=calculatehrs(h);
+b=calculatemin(m);
+c=calculatemin(s);
+a=changehrs(m,a);
+
+for(int i=a;i>0;i-=6)
+for(int j=b;j>0;j-=6)
+for(int k=c;k>0;k-=6)
+{
+setbkcolor(7);
+settextstyle(1,HORIZ_DIR,5);
+setcolor(BLUE);
+outtextxy(190,20,”Analog Clock”);
+settextstyle(8,HORIZ_DIR,2);
+
+setcolor(BLUE);
+circle(300,200,102);
+setcolor(YELLOW);
+circle(300,200,100);
+outtextxy(385,185,”3″);
+outtextxy(288,98,”12″);
+outtextxy(207,185,”9″);
+outtextxy(295,270,”6″);
+
+circle(345,123,2);
+circle(378,155,2);
+circle(378,245,2);
+circle(345,280,2);
+circle(253,278,2);
+circle(223,245,2);
+circle(223,155,2);
+circle(253,123,2);
+
+setcolor(RED);
+pieslice(300,200,i-1,i,75);
+setcolor(WHITE);
+pieslice(300,200,j-1,j,85);
+
+setcolor(BLUE);
+pieslice(300,200,k-1,k,95);
+
+setcolor(RED);
+settextstyle(3,HORIZ_DIR,1);
+outtextxy(360,400,”Press any key to exit…!!”);
+sleep(1);
+clearviewport();
+
+if(i==6)
+a=360;
+if(j==6)
+b=360;
+if(k==6)
+c=360;
+
+if(kbhit())
+{
+setcolor(YELLOW);
+setbkcolor(BLUE);
+settextstyle(1,HORIZ_DIR,8);
+outtextxy(130,150,”Thank You”);
+sleep(3);
+exit(0);
+}
 
 }
 }
